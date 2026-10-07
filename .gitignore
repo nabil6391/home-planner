@@ -1,0 +1,9 @@
+node_modules
+dist
+shots
+.DS_Store
+
+# Developer brochure floor-plan images (copyrighted marketing material) and
+# anything derived from them that still shows the original drawing.
+reference/*.png
+public/plans/*-drawing.png
