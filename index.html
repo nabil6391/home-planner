@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Planner</title>
+  <script type="module" crossorigin src="./assets/index-DkX5MppQ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BpFVdOzL.css">
+</head>
+<body>
+  <div id="mobileNotice"><div>
+    <h2>Home Planner needs more room</h2>
+    <p>This is a desktop tool — dragging furniture and dialing in exact clearances works best with a mouse and a wide screen. Please open it on a laptop or desktop.</p>
+  </div></div>
+  <aside id="panel">
+    <div class="h1row">
+      <h1>Home Planner</h1>
+      <button id="aboutBtn" title="About this project">?</button>
+    </div>
+
+    <section>
+      <h2>Layout</h2>
+      <select id="layout"><option value="hall">Open hall (free size)</option></select>
+    </section>
+
+    <section id="hallSection">
+      <h2>Hall</h2>
+      <div class="row">
+        <label>Width (m) <input id="hallW" type="number" step="0.1" min="2" max="60" /></label>
+        <label>Length (m) <input id="hallD" type="number" step="0.1" min="2" max="60" /></label>
+      </div>
+    </section>
+
+    <section>
+      <h2>Add furniture</h2>
+      <div id="catalog"></div>
+      <button id="addAll" class="wide">Add all my items</button>
+    </section>
+
+    <section id="selection" hidden>
+      <h2>Selected</h2>
+      <label class="full">Name <input id="selName" type="text" /></label>
+      <div class="row three">
+        <label>W <input id="selW" type="number" min="5" step="1" /></label>
+        <label>D <input id="selD" type="number" min="5" step="1" /></label>
+        <label>H <input id="selH" type="number" min="5" step="1" /></label>
+      </div>
+      <div class="row">
+        <label>Space in front <input id="selZF" type="number" min="0" step="5" /></label>
+        <label>Space behind <input id="selZB" type="number" min="0" step="5" /></label>
+      </div>
+      <p class="hint">Sizes in cm. Rotation <span id="selRot">0</span>°</p>
+      <div class="row buttons">
+        <button id="rotL" title="Rotate -15° (Q)">⟲ 15°</button>
+        <button id="rot90" title="Rotate 90° (R)">↻ 90°</button>
+        <button id="rotR" title="Rotate +15° (E)">⟳ 15°</button>
+      </div>
+      <div class="row buttons">
+        <button id="dup" title="Ctrl/Cmd + D">Duplicate</button>
+        <button id="del" class="danger" title="Delete">Delete</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Placed <span id="count"></span></h2>
+      <ul id="list"></ul>
+    </section>
+
+    <section>
+      <h2>File</h2>
+      <div class="row buttons">
+        <button id="export">Export</button>
+        <button id="import">Import</button>
+        <button id="shot" title="Save the current view as an image">PNG</button>
+      </div>
+      <button id="reset" class="wide danger">Clear hall</button>
+      <input id="importFile" type="file" accept="application/json" hidden />
+    </section>
+  </aside>
+
+  <main id="stage">
+    <div id="toolbar">
+      <button id="view3d" class="on">3D</button>
+      <button id="viewTop">Top</button>
+      <label class="snap">Snap <select id="snap">
+        <option value="0">off</option><option value="1">1 cm</option><option value="5" selected>5 cm</option><option value="10">10 cm</option>
+      </select></label>
+      <label class="snap check"><input id="lowWalls" type="checkbox" /> Low walls</label>
+      <label class="snap check" id="drawingToggle"><input id="drawing" type="checkbox" /> Plan drawing</label>
+    </div>
+    <div id="legend">
+      <span><i class="sw ok"></i>OK</span>
+      <span><i class="sw zone"></i>Needed space</span>
+      <span><i class="sw bad"></i>Overlap / outside</span>
+    </div>
+    <p id="help">Drag items to move · Q/E rotate 15° · R 90° · Del delete · ⌘/Ctrl+D duplicate · T toggle view · right-drag to pan</p>
+  </main>
+
+  <div id="aboutOverlay" hidden>
+    <div id="aboutCard">
+      <button id="aboutClose" aria-label="Close">×</button>
+      <h2>Home Planner</h2>
+      <p>A furniture-layout tool built in Three.js. Real floor plans (traced from brochure images) and
+      furniture models (built to scale from photos) are placed in 3D, with live collision and clearance
+      checks as you drag things around.</p>
+      <p>Highlights:</p>
+      <ul>
+        <li>Parametric furniture generated in code — not imported models — each piece built from a few numbers (width/depth/height).</li>
+        <li>Floor plans extracted from brochure images with a small Python pipeline: wall colours and hand-traced lines become real geometry.</li>
+        <li>Separating-axis collision detection flags overlaps and blocked clearance (legroom, door swing, vent gaps) live, in both 3D and top-down view.</li>
+        <li>Multi-floor layouts shown side by side, with autosave and JSON import/export.</li>
+      </ul>
+      <p class="hint">Try the "Open hall" layout to drop furniture freely, or pick one of the floor plans and hit "Add all my items".</p>
+      <label class="check"><input id="aboutDontShow" type="checkbox" /> Don't show this again</label>
+    </div>
+  </div>
+
+</body>
+</html>
